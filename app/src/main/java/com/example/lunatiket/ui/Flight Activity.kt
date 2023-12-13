@@ -25,9 +25,9 @@ class FlightActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFlightBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         viewManager = LinearLayoutManager(this)
         getUsersData()
+
     }
 
     private fun getUsersData() {

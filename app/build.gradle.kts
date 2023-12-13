@@ -2,9 +2,10 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-android-extensions")
+    id("kotlin-kapt")
     id("com.google.gms.google-services")
-
 }
+
 android {
     namespace = "com.example.lunatiket"
     compileSdk = 34
@@ -35,10 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
-
 }
 
 dependencies {
@@ -67,5 +67,10 @@ dependencies {
     //dependecy injection
     implementation ("io.insert-koin:koin-android:3.1.2")
 
+    implementation("androidx.room:room-runtime:2.6.0")
+    implementation("androidx.room:room-ktx:2.6.0")
+
 
 }
+
+
