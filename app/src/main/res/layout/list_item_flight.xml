@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/city"
+        android:id="@+id/airport"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="74dp"
         android:layout_marginTop="130dp"
         android:fontFamily="@font/monserratbold"
-        android:text="city"
+        android:text="Airport"
         android:textColor="@color/black"
         android:textSize="13sp"
         android:textStyle="bold" />
@@ -25,7 +25,19 @@
         android:layout_marginLeft="74dp"
         android:layout_marginTop="130dp"
         android:fontFamily="@font/monserratbold"
-        android:text="city_name"
+        android:text="City Name"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/region"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="74dp"
+        android:layout_marginTop="130dp"
+        android:fontFamily="@font/monserratbold"
+        android:text="Region"
         android:textColor="@color/black"
         android:textSize="13sp"
         android:textStyle="bold" />

@@ -1,15 +1,18 @@
 package com.example.lunatiket.ui
 
+import MainAdapter
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.lunatiket.data.MainAdapter
 import com.example.lunatiket.data.remote.ApiService
-import com.example.lunatiket.data.remote.PesawatItem
+import com.example.lunatiket.data.remote.response.AirportResponseItem
 import com.example.lunatiket.databinding.ActivityFlightBinding
 import com.example.lunatiket.utils.Constant.BASE_URL
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,33 +28,42 @@ class FlightActivity : AppCompatActivity() {
 
         viewManager = LinearLayoutManager(this)
         getUsersData()
-
     }
-    private fun getUsersData(){
-        var retrofit = Retrofit.Builder()
+
+    private fun getUsersData() {
+        val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
 
-        retrofit.getLanguages().enqueue(object: retrofit2.Callback<List<PesawatItem>> {
-            override fun onResponse(
-                call: retrofit2.Call<List<PesawatItem>>,
-                response: retrofit2.Response<List<PesawatItem>>
-            ){
-                if (response.isSuccessful){
-                    val data = response.body()!!
-                    viewAdapter = MainAdapter(baseContext, data)
-                    binding.listRv.apply{
-                        layoutManager = viewManager
-                        adapter = viewAdapter
+        retrofit.getAirport().enqueue(object : Callback<List<AirportResponseItem>> {
+            override fun onResponse(call: Call<List<AirportResponseItem>>, response: Response<List<AirportResponseItem>>) {
+                Log.d("onResponse", "test")
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    Log.e("On Response", response.message())
+                    if (data != null) {
+                        // Handle the data
+                        viewAdapter = MainAdapter(baseContext, data)
+                        binding.listRv.apply {
+                            layoutManager = viewManager
+                            adapter = viewAdapter
+                        }
+
                     }
+                } else {
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("On Response", "Error: $errorBody")
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<List<PesawatItem>>, t: Throwable) {
+            override fun onFailure(call: Call<List<AirportResponseItem>>, t: Throwable) {
                 t.printStackTrace()
+                Log.d("OtherActivity", "OnFailure" + t.message)
             }
         })
+
+
     }
 }

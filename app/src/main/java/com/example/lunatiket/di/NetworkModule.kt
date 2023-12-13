@@ -17,7 +17,7 @@ val networkModule= module{
     }
     single{
         Retrofit.Builder()
-            .baseUrl("https://trains.p.rapidapi.com/")
+            .baseUrl("https://api.api-ninjas.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
